@@ -1,88 +1,153 @@
-import json 
-
+import json
 
 def open_library(filename):
-    # Create empty dictionaries just in case the library file is empty
-    students = {}
-    books = {}
 
-    # Open the library file encoded in JSON and load it into the data object
-    # We use the with keyword so we don't have to explicitly close the file
-    # later.
-    #
-    # Alternatively you could use:
-    #
-    #  f = open(filename)
-    #  data = json.load(f)
-    #  f.close()
-    #
-    # and accomplish the same thing.
+    students = {}
+
+    books = {}
 
     with open(filename) as f:
         data = json.load(f)
 
-    # If there are students or books in the library,
-    # overwrite the empty dictionaries we created
     if data['students'] != {}:
         students = data['students']
 
     if data['books'] != {}:
         books = data['books']
 
-    # Return the data we loaded from the file
-    return students, books
-
+    return students,books
 
 def add_book(filename, isbn, title, author):
-    # Here's a start
+
     students, books = open_library(filename)
 
-    # Now how can we add books to the data?
-    # In the space below, write code that adds the key isbn
-    # and the value {'title':title, 'author':author}
-    # to the books object.
+    isbn=input("what is the isbn?")
+    title=input("what is the title?")
+    author=input("who is the author?")
 
-    # Finally, write code that writes the new data to the library
-    # Do we need to return anything?
-    pass
+    books[isbn] = {'title': title, 'author':author}
+
+
+    print("Book has been sucesfully added to the library!!")
+
+
+    with open(filename) as f:
+        json.dump({'students': students, 'books': books}, f)
 
 
 def remove_book(filename, isbn):
+
     students, books = open_library(filename)
 
-    # How can we *remove* an item from a dictionary?
-    # Write code to delete the book keyed by isbn in the space below
+    for key in books:
 
-    # Now write code that saves the new version of the data to your library
-    pass
+        print(key,books[key])
+        print('')
+        print('')
 
+    isbn = input("what is the isbn of the book you wish to delete?")
+
+    if isbn in books:
+        del books[isbn]
+
+    print("book has been deleted")
+
+
+    with open(filename) as f:
+        json.dump({'students': students, 'books': books}, f)
 
 def check_out(filename, isbn, s_id):
     students, books = open_library(filename)
 
     # Find a way to mark a book as checked out. Be sure to associate
     # the book with the student who borrowed it!
+    print("ALL BOOKS IN LIBRARY")
+    for key in books:
+        print(key, books[key])
+        print('')
+        print('')
+
+
+    student_name=input("what is your name?")
+    s_id=input("what is ur ID?")
+
+    isbn=input('what book do you want to check out(choose by isbn)?')
+
+    if isbn not in books:
+        print ("Book is not in Library")
+    else:
+        books[isbn] = {'status': "checked out"}
+        print('%s has been checked out' % isbn)
+        students = {student_name: s_id}
+
 
 
     # And again save the data here
 
-    pass
+    with open(filename) as f:
+        json.dump({'students': students, 'books': books}, f)
 
-
-def return_book(filename, isbn):
+def return_book(filename,isbn):
     students, books = open_library(filename)
+    isbn=input("what book do you want to return?")
+
+    if books[isbn]:{'status':"checked in"}
+    print("book is already checked in" )
+
+
+    if isbn in books:
+        books[isbn] = {'status': "checked in"}
+    else:
+        print("book is not in Library")
 
     # Now ensure that the book is no longer checked out and save the changes
     # to the library.
+    with open(filename) as f:
+        json.dump({'students': students, 'books': books}, f)
 
-    pass
 
-
-def status(filename):
+def status(filename,isbn):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
     # and one of all available books.
+    print("              ALL BOOKS IN LIBRARY:")
+    for key in books:
 
-    pass
+        print(key,books[key])
+        print('')
+        print('')
+
+    print ("          BOOKS THAT HAVE BEEN CHECKED OUT:")
 
 
+# Main loofor key, value in mydic.iteritems() :
+
+
+
+while True:
+    print('=' * 21)
+    print('   Library System')
+    print('=' * 21)
+    print('1. Add books to the library')
+    print('2. Remove books from library ')
+    print('3. Check out book from library ')
+    print('4. Return book')
+    print('5. Library status')
+    print('Q. Quit')
+    m = input('Select an option from above or enter Q to quit. ')
+    if m.upper() == 'Q':
+        break
+
+    # replace 'pass' with appropriate inputs and function calls.
+    elif m == '1':
+        add_book('data/test.json','isbn','title','author')
+    elif m == '2':
+        remove_book('data/test.json','isbn')
+    elif m == '3':
+        check_out('data/test.json','isbn','s_id')
+    elif m == '4':
+        return_book('data/test.son','isbn')
+    elif m == '5':
+        status('data/test.json','isbn')
+    else:
+        print('Invalid selection.')
