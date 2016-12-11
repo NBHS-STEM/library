@@ -41,9 +41,11 @@ def add_book(filename, isbn, title, author):
     # In the space below, write code that adds the key isbn
     # and the value {'title':title, 'author':author}
     # to the books object.
-
+    books[isbn] = {'title': title, 'author':author}
     # Finally, write code that writes the new data to the library
     # Do we need to return anything?
+    with open(filename) as f:
+        json.dump({'students':students,'books':books}, f)
     pass
 
 
@@ -52,8 +54,11 @@ def remove_book(filename, isbn):
 
     # How can we *remove* an item from a dictionary?
     # Write code to delete the book keyed by isbn in the space below
-
+     if 'isbn' in remove_book:
+        del remove_book['isbn']
     # Now write code that saves the new version of the data to your library
+    with open("replayScript.json", "w") as jsonFile:
+    jsonFile.write(json.dumps(data))
     pass
 
 
@@ -62,10 +67,11 @@ def check_out(filename, isbn, s_id):
 
     # Find a way to mark a book as checked out. Be sure to associate
     # the book with the student who borrowed it!
-
-
+    
+     f.__setitem__("filename",checked out) 
     # And again save the data here
-
+    with open("replayScript.json", "w") as jsonFile:
+    jsonFile.write(json.dumps(data))
     pass
 
 
