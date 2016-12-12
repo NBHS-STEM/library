@@ -51,12 +51,16 @@ def add_book(filename, isbn, title, author):
 
 def remove_book(filename, isbn):
     students, books = open_library(filename)
-
+    
     # How can we *remove* an item from a dictionary?
     # Write code to delete the book keyed by isbn in the space below
-
+        if 'isbn' in books:
+            del books['isbn']
+            
     # Now write code that saves the new version of the data to your library
-
+        with open(filename) as f:
+            json.dump({;students':students,'books':books}, f)
+                       
 def check_out(filename, isbn, s_id):
     students, books = open_library(filename)
 
