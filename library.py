@@ -52,7 +52,7 @@ def remove_book(filename, isbn):
 
     # How can we *remove* an item from a dictionary?
     # Write code to delete the book keyed by isbn in the space below
-
+del book['isbn']
     # Now write code that saves the new version of the data to your library
     pass
 
