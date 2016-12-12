@@ -54,9 +54,12 @@ def remove_book(filename, isbn):
 
     # How can we *remove* an item from a dictionary?
     # Write code to delete the book keyed by isbn in the space below
-
+data=open_library(filename)
+books=data[1]
+Del dict['%s' % isbn]
+dict.clear()
     # Now write code that saves the new version of the data to your library
-
+remove_book.close()
 def check_out(filename, isbn, s_id):
     students, books = open_library(filename)
 
@@ -82,6 +85,7 @@ def status(filename):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
     # and one of all available books.
+    
 
     pass
 
