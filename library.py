@@ -91,12 +91,12 @@ def return_book(filename,isbn):
     students, books = open_library(filename)
     isbn=input("what book do you want to return?")
 
-    if books[isbn]['checked_out]=''
+    if books[isbn]
     print("book is already checked in" )
 
 
-    if isbn in books:
-        books[isbn]['checked_out']=s_id
+    if ['checked_out'] in books[isbn]:
+            del books[isbn]['checked_out']
     else:
         print("book is not in Library")
 
@@ -118,6 +118,7 @@ def status(filename,isbn):
         print('')
 
     print ("          BOOKS THAT HAVE BEEN CHECKED OUT:")
+    print(books[isbn]['checked_out'])
 
 
 # Main loofor key, value in mydic.iteritems() :
