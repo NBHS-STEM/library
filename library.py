@@ -31,7 +31,7 @@ def add_book(filename, isbn, title, author):
     print("Book has been sucesfully added to the library!!")
 
 
-    with open(filename) as f:
+    with open(filename,'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
 
@@ -53,7 +53,7 @@ def remove_book(filename, isbn):
     print("book has been deleted")
 
 
-    with open(filename) as f:
+    with open(filename,'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
 def check_out(filename, isbn, s_id):
@@ -76,7 +76,7 @@ def check_out(filename, isbn, s_id):
     if isbn not in books:
         print ("Book is not in Library")
     else:
-        books[isbn] = {'status': "checked out"}
+        books[isbn]['checked_out']=s_id
         print('%s has been checked out' % isbn)
         students = {student_name: s_id}
 
@@ -84,25 +84,25 @@ def check_out(filename, isbn, s_id):
 
     # And again save the data here
 
-    with open(filename) as f:
+    with open(filename,'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
 def return_book(filename,isbn):
     students, books = open_library(filename)
     isbn=input("what book do you want to return?")
 
-    if books[isbn]:{'status':"checked in"}
+    if books[isbn]['checked_out]=''
     print("book is already checked in" )
 
 
     if isbn in books:
-        books[isbn] = {'status': "checked in"}
+        books[isbn]['checked_out']=s_id
     else:
         print("book is not in Library")
 
     # Now ensure that the book is no longer checked out and save the changes
     # to the library.
-    with open(filename) as f:
+    with open(filename,'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
 
