@@ -1,7 +1,7 @@
 import json
 
-def open_library(filename):
 
+def open_library(filename):
     students = {}
 
     books = {}
@@ -15,33 +15,29 @@ def open_library(filename):
     if data['books'] != {}:
         books = data['books']
 
-    return students,books
+    return students, books
+
 
 def add_book(filename, isbn, title, author):
-
     students, books = open_library(filename)
 
-    isbn=input("what is the isbn?")
-    title=input("what is the title?")
-    author=input("who is the author?")
+    isbn = input("what is the isbn?")
+    title = input("what is the title?")
+    author = input("who is the author?")
 
-    books[isbn] = {'title': title, 'author':author}
-
+    books[isbn] = {'title': title, 'author': author}
 
     print("Book has been sucesfully added to the library!!")
 
-
-    with open(filename,'w') as f:
+    with open(filename, 'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
 
 def remove_book(filename, isbn):
-
     students, books = open_library(filename)
 
     for key in books:
-
-        print(key,books[key])
+        print(key, books[key])
         print('')
         print('')
 
@@ -52,9 +48,9 @@ def remove_book(filename, isbn):
 
     print("book has been deleted")
 
-
-    with open(filename,'w') as f:
+    with open(filename, 'w') as f:
         json.dump({'students': students, 'books': books}, f)
+
 
 def check_out(filename, isbn, s_id):
     students, books = open_library(filename)
@@ -67,58 +63,67 @@ def check_out(filename, isbn, s_id):
         print('')
         print('')
 
+    s_id = input("what is ur ID?")
 
-    student_name=input("what is your name?")
-    s_id=input("what is ur ID?")
-
-    isbn=input('what book do you want to check out(choose by isbn)?')
+    isbn = input('what book do you want to check out(choose by isbn)?')
 
     if isbn not in books:
-        print ("Book is not in Library")
+        print("Book is not in Library")
     else:
-        books[isbn]['checked_out']=s_id
+        books[isbn]['checked_out'] = s_id
         print('%s has been checked out' % isbn)
-        students = {student_name: s_id}
-
-
 
     # And again save the data here
 
-    with open(filename,'w') as f:
+    with open(filename, 'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
-def return_book(filename,isbn):
+
+def return_book(filename, isbn):
     students, books = open_library(filename)
-    isbn=input("what book do you want to return?")
+    isbn = input("what book do you want to return(by isbn)?")
 
-    if books[isbn]
-    print("book is already checked in" )
+    if books[isbn]['checked_out']:
+        del books[isbn]['checked_out']
+        print("%s has been returned" % isbn)
 
-
-    if ['checked_out'] in books[isbn]:
-            del books[isbn]['checked_out']
     else:
-        print("book is not in Library")
+        print("book is not in Library or book is already checked in")
 
     # Now ensure that the book is no longer checked out and save the changes
     # to the library.
-    with open(filename,'w') as f:
+    with open(filename, 'w') as f:
         json.dump({'students': students, 'books': books}, f)
 
 
-def status(filename,isbn):
+def status(filename, isbn, ):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
     # and one of all available books.
-    print("              ALL BOOKS IN LIBRARY:")
-    for key in books:
 
-        print(key,books[key])
-        print('')
-        print('')
 
-    print ("          BOOKS THAT HAVE BEEN CHECKED OUT:")
-    print(books[isbn]['checked_out'])
+    print("Do you want:")
+    print("1. ALL BOOKS")
+    print("2. BOOKS CHECKED OUT")
+    print("choose 1 or 2")
+    option = input("")
+    if option == '1':
+
+        print("              ALL BOOKS IN LIBRARY:")
+        for key in books:
+            print(key, books[key])
+            print('')
+            print('')
+
+    elif option == '2':
+        print("          BOOKS THAT HAVE BEEN CHECKED OUT:")
+
+        if books[isbn]["check_out"]:
+            for key in books:
+                print(key, books[isbn]["check_out"])
+
+    else:
+        print('Invalid selection.')
 
 
 # Main loofor key, value in mydic.iteritems() :
@@ -141,14 +146,14 @@ while True:
 
     # replace 'pass' with appropriate inputs and function calls.
     elif m == '1':
-        add_book('data/test.json','isbn','title','author')
+        add_book('data/test.json', 'isbn', 'title', 'author')
     elif m == '2':
-        remove_book('data/test.json','isbn')
+        remove_book('data/test.json', 'isbn')
     elif m == '3':
-        check_out('data/test.json','isbn','s_id')
+        check_out('data/test.json', 'isbn', 's_id')
     elif m == '4':
-        return_book('data/test.son','isbn')
+        return_book('data/test.json', 'isbn')
     elif m == '5':
-        status('data/test.json','isbn')
+        status('data/test.json', 'isbn', )
     else:
         print('Invalid selection.')
