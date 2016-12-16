@@ -87,7 +87,16 @@ def return_book(filename, isbn):
 def status(filename):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
-    # and one of all available books.
+    # and one of all available books
+    # Pseudocode:
+    #
+    # for book in books
+    # if book checked_out
+    #   add to unavailable
+    # else
+    #   add to available
+    # print unavailable
+    # print available
     available = []
     unavailable = []
 
