@@ -71,7 +71,7 @@ def check_out(filename, isbn, s_id):
         print("Book is not in Library")
     else:
         books[isbn]['checked_out'] = s_id
-        print('%s has been checked out' % isbn)
+        print("%s has been checked out" % isbn)
 
     # And again save the data here
 
@@ -96,7 +96,7 @@ def return_book(filename, isbn):
         json.dump({'students': students, 'books': books}, f)
 
 
-def status(filename, isbn, ):
+def status(filename, isbn):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
     # and one of all available books.
@@ -117,16 +117,20 @@ def status(filename, isbn, ):
 
     elif option == '2':
         print("          BOOKS THAT HAVE BEEN CHECKED OUT:")
+        print("")
 
-        if books[isbn]["check_out"]:
-            for key in books:
-                print(key, books[isbn]["check_out"])
-        http://stackoverflow.com/questions/3817529/syntax-for-creating-a-dictionary-into-another-dictionary-in-python
+        for key in books:
+            dict = books[key]
+            for thing in dict:
+                if thing == 'checked_out':
+                    print(books[key])
+
+
     else:
         print('Invalid selection.')
 
 
-# Main loofor key, value in mydic.iteritems() :
+
 
 
 
