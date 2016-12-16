@@ -79,15 +79,14 @@ def return_book(filename, isbn):
 
     # Now ensure that the book is no longer checked out and save the changes
     # to the library.
+    del(books[isbn]['checked_out'])
 
-    pass
-
+    with open(filename, 'w') as f:
+        json.dump({'students':students, 'books':books}, f)
 
 def status(filename):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
     # and one of all available books.
-
-    pass
 
 
