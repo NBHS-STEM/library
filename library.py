@@ -121,7 +121,7 @@ def status(filename, isbn, ):
         if books[isbn]["check_out"]:
             for key in books:
                 print(key, books[isbn]["check_out"])
-
+        http://stackoverflow.com/questions/3817529/syntax-for-creating-a-dictionary-into-another-dictionary-in-python
     else:
         print('Invalid selection.')
 
