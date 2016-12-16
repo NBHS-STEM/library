@@ -88,5 +88,8 @@ def status(filename):
     students, books = open_library(filename)
     # Print out two lists - one of all books currently checked out,
     # and one of all available books.
+    available = []
+    unavailable = []
+
 
 
