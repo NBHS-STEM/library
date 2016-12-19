@@ -67,12 +67,20 @@ def check_out(filename, isbn, s_id):
 
     isbn = input('what book do you want to check out(choose by isbn)?')
 
-    if isbn not in books:
-        print("Book is not in Library")
-    else:
+    if books[isbn]:
+        dict=books[isbn]
+        for thing in dict:
+            if thing == 'checked_out':
+                print("Book has already been checked out, SORRY!!")
+
+
+    elif isbn in books:
         books[isbn]['checked_out'] = s_id
         print("%s has been checked out" % isbn)
 
+    else:
+        print("Book is not in Library")
+        
     # And again save the data here
 
     with open(filename, 'w') as f:
