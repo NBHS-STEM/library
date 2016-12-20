@@ -63,24 +63,28 @@ def check_out(filename, isbn, s_id):
         print('')
         print('')
 
-    s_id = input("what is ur ID?")
 
     isbn = input('what book do you want to check out(choose by isbn)?')
-
     if books[isbn]:
-        dict=books[isbn]
+        dict = books[isbn]
         for thing in dict:
             if thing == 'checked_out':
                 print("Book has already been checked out, SORRY!!")
 
 
-    elif isbn in books:
-        books[isbn]['checked_out'] = s_id
-        print("%s has been checked out" % isbn)
+    elif isbn is not books:
+        print("book is not in library, go to add books")
+    
+    
+    else: 
+            if isbn in books:
+                s_id = input("what is ur ID?")
+                books[isbn]['checked_out'] = s_id
+                print("%s has been checked out" % isbn)
 
-    else:
-        print("Book is not in Library")
-        
+            else:
+                print("Book is not in Library")
+
     # And again save the data here
 
     with open(filename, 'w') as f:
@@ -138,10 +142,6 @@ def status(filename, isbn):
         print('Invalid selection.')
 
 
-
-
-
-
 while True:
     print('=' * 21)
     print('   Library System')
@@ -169,3 +169,9 @@ while True:
         status('data/test.json', 'isbn', )
     else:
         print('Invalid selection.')
+
+
+
+
+
+
