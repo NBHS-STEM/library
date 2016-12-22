@@ -100,5 +100,15 @@ def status(filename):
     available = []
     unavailable = []
 
+    for book in books:
+        if 'checked_out' in books.keys():
+            unavailable.append(book)
+        else:
+            available.append(book)
 
+    for book in available:
+        print(book)
+    
+    for book in unavailable:
+        print(book)
 
